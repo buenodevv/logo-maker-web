@@ -1,13 +1,10 @@
 
+import Header from "./components/Header"
 import { Button } from "./components/ui/button"
-
-
-
-
 function App() {
   return (
     <>
-      <Button>Hello</Button>
+      <Header />
     </>
   )
 }
