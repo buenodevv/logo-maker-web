@@ -44,7 +44,7 @@ function IconController() {
           />
         </div>
         <div className="py-2">
-          <label className="p-2 flex justify-between items-center">Rotate <span>{rotate}°</span></label>
+          <label className="p-2 flex justify-between items-center">Icon Color</label>
           <ColorPickerController hideController={true}
           selectedColor={(color)=>setColor(color)} />
         </div>
