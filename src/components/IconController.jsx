@@ -1,7 +1,8 @@
 import { Slider } from "@/components/ui/slider";
 import { Smile } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ColorPickerController from "./ColorPickerController";
+import { UpdateStorageContext } from '../context/UpdateStorageContext';
 
 
 function IconController() {
@@ -9,15 +10,17 @@ function IconController() {
   const [rotate, setRotate] = useState(0)
   const [color, setColor] = useState('rgba(255,255,255,1)')
   const storageValue = JSON.parse(localStorage.getItem('value'))
+  const { updateStorage, setUpdateStorage } = useContext(UpdateStorageContext)
   
   useEffect(() => {
-    const updateValue={
+    const updatedValue={
       ...storageValue,
       iconSize:size,
       iconRotate:rotate,
       iconColor:color,
       icon:'Smile'
     }
+    setUpdateStorage(updatedValue)
     localStorage.setItem('value', JSON.stringify(updateValue))
   }, [size, rotate, color])
 
