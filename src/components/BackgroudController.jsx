@@ -4,10 +4,10 @@ import ColorPickerController from "./ColorPickerController";
 import { UpdateStorageContext } from "@/context/UpdateStorageContext";
 
 function BackgroudController() {
-  const [rounded, setRounded] = useState(0)
-  const [padding, setPadding] = useState(0)
-  const [color, setColor] = useState('rgba(255,255,255,1)')
   const storageValue = JSON.parse(localStorage.getItem('value'))
+  const [rounded, setRounded] = useState(storageValue?storageValue?.bgRounded:0)
+  const [padding, setPadding] = useState(storageValue?storageValue?.bgPadding:0)
+  const [color, setColor] = useState(storageValue?storageValue?.bgColor:'#000')
   const { updateStorage, setUpdateStorage } = useContext(UpdateStorageContext) 
   useEffect(() => {
     const updateValue = {

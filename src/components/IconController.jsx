@@ -9,7 +9,7 @@ function IconController() {
   const storageValue = JSON.parse(localStorage.getItem('value'))
   const [size, setSize] = useState(storageValue?storageValue?.iconSize:280)
   const [rotate, setRotate] = useState(storageValue?storageValue?.iconRotate:0)
-  const [color, setColor] = useState('rgba(255,255,255,1)')
+  const [color, setColor] = useState(storageValue?storageValue?.iconColor:'#fff')
   const { updateStorage, setUpdateStorage } = useContext(UpdateStorageContext)
   
   useEffect(() => {
