@@ -1,6 +1,6 @@
 import { UpdateStorageContext } from "@/context/UpdateStorageContext"
 import { icons } from "lucide-react"
-import React, { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 
 function LogoPreview() {
     const [storageValue, setStorageValue] = useState()

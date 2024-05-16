@@ -1,5 +1,5 @@
 export const iconList = [
-    'Accessibility', 'Activity', 'Airplane', 'Alarm', 'AlignBottom', 'AlignLeft', 'AlignRight', 'AlignTop',
+    'Accessibility', 'Activity', 'Airplay', 'AlignCenter', 'AlignLeft', 'AlignRight',
     'Anchor', 'Aperture', 'Apple', 'Archive', 'ArrowBigDown', 'ArrowBigLeft', 'ArrowBigRight', 'ArrowBigUp',
     'ArrowDown', 'ArrowDownCircle', 'ArrowLeft', 'ArrowLeftCircle', 'ArrowRight', 'ArrowRightCircle', 'ArrowUp', 'ArrowUpCircle',
     'AtSign', 'Award', 'Backspace', 'BarChart', 'BarChart2', 'Battery', 'BatteryCharging', 'Bee', 'Bell', 'Bluetooth', 'Bold',
