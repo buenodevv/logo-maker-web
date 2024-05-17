@@ -12,7 +12,7 @@ function IconController() {
   const [rotate, setRotate] = useState(storageValue?storageValue?.iconRotate:0)
   const [color, setColor] = useState(storageValue?storageValue?.iconColor:'#fff')
   const { updateStorage, setUpdateStorage } = useContext(UpdateStorageContext)
-  const {icon, setIcon} = useState(storageValue?storageValue?.icon:'Smile');
+  const [icon, setIcon] = useState(storageValue?storageValue?.icon:'Smile');
   
   useEffect(() => {
     const updatedValue={
