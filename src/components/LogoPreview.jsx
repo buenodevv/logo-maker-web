@@ -1,4 +1,5 @@
 import { UpdateStorageContext } from "@/context/UpdateStorageContext"
+import html2canvas from "html2canvas"
 import { icons } from "lucide-react"
 import { useContext, useEffect, useState } from "react"
 
@@ -12,11 +13,26 @@ function LogoPreview({downloadIcon}) {
         setStorageValue(storageData)
     },[updateStorage])
 
-    useEffect(() => {
-        if(downloadIcon){
-            console.log("btn Clicked")
+   useEffect(() => {
+       if(downloadIcon)
+        {
+            downloadPngLogo();
         }
-    }, [downloadIcon])
+   },[downloadIcon])
+   const downloadPngLogo=()=>{
+       const downloadLogoDiv=document.getElementById('downloadLogoDiv');
+
+       html2canvas(downloadLogoDiv,{
+           backgroundColor:null
+       }).then(canvas=>{
+           const pngImage=canvas.toDataURL('image/png');
+           const downloadLink=document.createElement('a');
+           downloadLink.href=pngImage;
+           downloadLink.download='logo rodrigo bueno.png';
+           downloadLink.click();
+
+       })
+   }
     const Icon=({name, color, size, rotate})=>{
         const LucidIcon=icons[name];
         if(!LucidIcon){
@@ -36,7 +52,9 @@ function LogoPreview({downloadIcon}) {
                 padding:storageValue?.bgPadding
             }
         }>
-            <div className="h-full w-full flex items-center justify-center"
+            <div
+            id="downloadLogoDiv"
+             className="h-full w-full flex items-center justify-center"
             style={{
                 borderRadius:storageValue?.bgRounded,
                 padding:storageValue?.bgPadding,

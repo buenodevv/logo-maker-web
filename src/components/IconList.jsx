@@ -6,6 +6,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import { iconList } from "@/constants/icons";
 
 import { Smile, icons } from "lucide-react";
@@ -13,8 +15,8 @@ import { useState } from "react";
 
 function IconList({ selectedIcon }) {
   const [openDialog, setOpenDialog] = useState(false);
-  const storageValue = JSON.parse(localStorage.getItem('value'))
-  const [icon, setIcon] = useState(storageValue?storageValue?.icon:'Smile');
+  const storageValue = JSON.parse(localStorage.getItem("value"));
+  const [icon, setIcon] = useState(storageValue ? storageValue?.icon : "Smile");
   const Icon = ({ name, color, size }) => {
     const LucidIcon = icons[name];
     if (!LucidIcon) {
@@ -32,28 +34,42 @@ function IconList({ selectedIcon }) {
       >
         <Icon name={icon} color="#000" size={20} />
       </div>
-      <Dialog open={openDialog}>
+      <Dialog open={openDialog} onOpenChange={setOpenDialog}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Pic your favorite icon</DialogTitle>
             <DialogDescription>
-              <div
-                className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4
-                            overflow-auto ma-w-lg min-w-md h-[400px] p-6"
-              >
-                {iconList.map((icon, index) => (
+              <Tabs defaultValue="icon" className="w-[400px]">
+                <TabsList>
+                  <TabsTrigger value="icon">Icons</TabsTrigger>
+                  <TabsTrigger value="color-icon">Color Icons</TabsTrigger>
+                </TabsList>
+                <TabsContent value="icon">
                   <div
-                    className="border p-3 flex rounded-sm items-center justify-center cursor-pointer"
-                    onClick={() => {
-                      selectedIcon(icon);
-                      setOpenDialog(false);
-                      setIcon(icon);
-                    }}
+                    className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4
+                            overflow-auto ma-w-lg min-w-md h-[400px] p-6"
                   >
-                    <Icon key={index} name={icon} color="#000" size={20} />
+                    {iconList.map((icon, index) => (
+                      <div
+                        key={index}
+                        className="border p-3 flex rounded-sm items-center justify-center cursor-pointer"
+                        onClick={() => {
+                          selectedIcon(icon);
+                          setOpenDialog(false);
+                          setIcon(icon);
+                        }}
+                      >
+                        <Icon key={index} name={icon} color="#000" size={20} />
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </TabsContent>
+                <TabsContent value="color-icon">
+                  Color Icon List
+                </TabsContent>
+              </Tabs>
+
+
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
