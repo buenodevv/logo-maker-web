@@ -9,14 +9,19 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { iconList } from "@/constants/icons";
+import axios from "axios";
 
 import { Smile, icons } from "lucide-react";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+const BASE_URL ="https://logoexpress.tubeguruji.com"
 function IconList({ selectedIcon }) {
   const [openDialog, setOpenDialog] = useState(false);
+  const [getPngIconList, setGetPngIconList] = useState([]);
   const storageValue = JSON.parse(localStorage.getItem("value"));
   const [icon, setIcon] = useState(storageValue ? storageValue?.icon : "Smile");
+  useEffect(() => {
+    getPngIcons();
+  })
   const Icon = ({ name, color, size }) => {
     const LucidIcon = icons[name];
     if (!LucidIcon) {
@@ -24,6 +29,12 @@ function IconList({ selectedIcon }) {
     }
     return <LucidIcon color={color} size={size} />;
   };
+  const getPngIcons = () => {
+    axios.get(BASE_URL+'/getIcons.php').then((resp) => {
+      console.log(resp.data);
+      setGetPngIconList(resp.data);
+    })
+  }
   return (
     <div>
       <label>Icon</label>
@@ -32,7 +43,10 @@ function IconList({ selectedIcon }) {
         className="p-3 cursor-pointer bg-gray-200 rounded-md w-[50px]
         h-[50px] my-5 flex items-center justify-center "
       >
-        <Icon name={icon} color="#000" size={20} />
+        {icon?.includes(".png") ? 
+        <img src={BASE_URL+'/png/'+icon} alt="png-icon" className="h-10 w-10" /> :
+        <Icon name={icon} color="#000" size={20} />          
+        }
       </div>
       <Dialog open={openDialog} onOpenChange={setOpenDialog}>
         <DialogContent>
@@ -65,7 +79,24 @@ function IconList({ selectedIcon }) {
                   </div>
                 </TabsContent>
                 <TabsContent value="color-icon">
-                  Color Icon List
+                <div
+                    className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4
+                            overflow-auto ma-w-lg min-w-md h-[400px] p-6"
+                  >
+                    {getPngIconList.map((icon, index) => (
+                      <div
+                        key={index}
+                        className="border p-3 flex rounded-sm items-center justify-center cursor-pointer"
+                        onClick={() => {
+                          selectedIcon(icon);
+                          setOpenDialog(false);
+                          setIcon(icon);
+                        }}
+                      >
+                        <img src={BASE_URL+"/png/"+icon} />
+                      </div>
+                    ))}
+                  </div>
                 </TabsContent>
               </Tabs>
 
