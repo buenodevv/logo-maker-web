@@ -11,7 +11,7 @@ export default defineConfig({
   },
   server: {
     host: true,
-    port: 8080,
+    port: 80,
     strictPort: true,
     proxy: {
       '/png':'https://logoexpress.tubeguruji.com'
