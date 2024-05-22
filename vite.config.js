@@ -8,12 +8,10 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-     server: {
-    host: true,
-  },
   },
   server: {
-    port: 3000,
+    host: true,
+    port: 8080,
     strictPort: true,
     proxy: {
       '/png':'https://logoexpress.tubeguruji.com'
